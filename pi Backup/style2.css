@@ -1,0 +1,20 @@
+body
+{
+background:100px;
+background-repeat:repeat-y;
+background: repeating-linear-gradient(red,yellow 10px,green 20px);
+}
+
+h1
+{
+color:#00ff00;
+}
+
+a:link a:visited a:active{
+color:#ff1493;
+}
+
+a:hover{
+background-color:#ff1493;
+color:#ff00ff;
+}
