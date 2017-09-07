@@ -6,7 +6,7 @@
 </head>
 <body>
 <?php
-system('sudo -u pi raspistill -w 1920 -h 1080 -t 10 -vf -hf -o ./room.jpg');
+system('raspistill -w 1920 -h 1080 -t 10 -vf -hf -o /var/www/html/room.jpg');
 ?>
 <h1>Room #330A Lighting</h1>
 <form name="opt" action="./light.php" method="post">
