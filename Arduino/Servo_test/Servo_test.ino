@@ -16,21 +16,11 @@ void setup() {
 int incomingBytes[11];
 void loop() {
   // put your main code here, to run repeatedly:
-  // have to send 0XRXXGXXBXX
+  // have to send 0SXRXXGXXBXX
   // include leading zero as stopgap
   if (Serial.available() > 0) {
     // read the incoming byte:
-    incomingBytes[0] = Serial.read();
-    incomingBytes[1] = Serial.read();
-    incomingBytes[2] = Serial.read();
-    incomingBytes[3] = Serial.read();
-    incomingBytes[4] = Serial.read();
-    incomingBytes[5] = Serial.read();
-    incomingBytes[6] = Serial.read();
-    incomingBytes[7] = Serial.read();
-    incomingBytes[8] = Serial.read();
-    incomingBytes[9] = Serial.read();
-    incomingBytes[10] = Serial.read();
+    readSerial();
 
     // say what you got:
     for(int x = 0; x < 11; x++){
@@ -39,3 +29,19 @@ void loop() {
     }
   }
 }
+
+void readSerial(){
+  incomingBytes[0] = Serial.read();
+  delay(2); //necessary because serial read executes as soon as data arrives, second runs before second bit gets here
+  incomingBytes[1] = Serial.read();
+  incomingBytes[2] = Serial.read();
+  incomingBytes[3] = Serial.read();
+  incomingBytes[4] = Serial.read();
+  incomingBytes[5] = Serial.read();
+  incomingBytes[6] = Serial.read();
+  incomingBytes[7] = Serial.read();
+  incomingBytes[8] = Serial.read();
+  incomingBytes[9] = Serial.read();
+  incomingBytes[10] = Serial.read();
+}
+
