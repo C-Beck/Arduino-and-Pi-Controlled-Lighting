@@ -13,7 +13,7 @@ void setup() {
   digitalWrite(53,HIGH);
   Serial.begin(57600);
 }
-int incomingBytes[11];
+char incomingBytes[11];
 int servoPos = 0;
 int ledR = 0;
 int ledG = 0;
@@ -28,24 +28,44 @@ void loop() {
     // say what you got:
     for(int x = 0; x < 11; x++){
       Serial.print("I received: ");
-      Serial.println(char(incomingBytes[x]));
+      Serial.println(incomingBytes[x]);
     }
-    servoPos = 
+    dataParse();
   }
 }
 
 void readSerial(){
-  incomingBytes[0] = Serial.read();
+  incomingBytes[0] = char(Serial.read());
   delay(2); //necessary because serial read executes as soon as data arrives, second runs before second bit gets here
-  incomingBytes[1] = Serial.read();
-  incomingBytes[2] = Serial.read();
-  incomingBytes[3] = Serial.read();
-  incomingBytes[4] = Serial.read();
-  incomingBytes[5] = Serial.read();
-  incomingBytes[6] = Serial.read();
-  incomingBytes[7] = Serial.read();
-  incomingBytes[8] = Serial.read();
-  incomingBytes[9] = Serial.read();
-  incomingBytes[10] = Serial.read();
+  incomingBytes[1] = char(Serial.read());
+  incomingBytes[2] = char(Serial.read());
+  incomingBytes[3] = char(Serial.read());
+  incomingBytes[4] = char(Serial.read());
+  incomingBytes[5] = char(Serial.read());
+  incomingBytes[6] = char(Serial.read());
+  incomingBytes[7] = char(Serial.read());
+  incomingBytes[8] = char(Serial.read());
+  incomingBytes[9] = char(Serial.read());
+  incomingBytes[10] = char(Serial.read());
+}
+
+void dataParse(){
+  String str(incomingBytes);
+  char temp1[5];
+  str.substring(str.indexOf("S")+1,str.indexOf("S")+2).toCharArray(temp1,5);
+  servoPos = strtol(temp1,NULL,16);
+  char temp2[5];
+  str.substring(str.indexOf("R")+1,str.indexOf("R")+3).toCharArray(temp2,5);
+  ledR = strtol(temp2,NULL,16);
+  char temp3[5];
+  str.substring(str.indexOf("G")+1,str.indexOf("G")+3).toCharArray(temp3,5);
+  ledG = strtol(temp3,NULL,16);
+  char temp4[5];
+  str.substring(str.indexOf("U")+1,str.indexOf("U")+3).toCharArray(temp4,5);
+  ledB = strtol(temp4,NULL,16);
+  Serial.println(servoPos);
+  Serial.println(ledR);
+  Serial.println(ledG);
+  Serial.println(ledB);
 }
 
