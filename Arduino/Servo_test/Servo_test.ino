@@ -14,10 +14,13 @@ void setup() {
   Serial.begin(57600);
 }
 int incomingBytes[11];
+int servoPos = 0;
+int ledR = 0;
+int ledG = 0;
+int ledB = 0;
 void loop() {
   // put your main code here, to run repeatedly:
-  // have to send 0SXRXXGXXBXX
-  // include leading zero as stopgap
+  // have to send SXRXXGXXBXX
   if (Serial.available() > 0) {
     // read the incoming byte:
     readSerial();
@@ -27,6 +30,7 @@ void loop() {
       Serial.print("I received: ");
       Serial.println(char(incomingBytes[x]));
     }
+    servoPos = 
   }
 }
 
