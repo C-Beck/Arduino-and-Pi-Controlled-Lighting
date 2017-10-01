@@ -2,11 +2,16 @@
 
 Servo servo1;
 Servo servo2;
+Servo servo3;
 
 void setup() {
   // put your setup code here, to run once:
   servo1.attach(2);
   servo2.attach(3);
+  servo3.attach(4);
+  servo1.write(45);
+  servo2.write(45);
+  servo3.write(45);
   pinMode(52,OUTPUT);
   digitalWrite(52,HIGH);
   pinMode(53,OUTPUT);
@@ -31,6 +36,7 @@ void loop() {
       Serial.println(incomingBytes[x]);
     }
     dataParse();
+    setServos();
   }
 }
 
@@ -67,5 +73,50 @@ void dataParse(){
   Serial.println(ledR);
   Serial.println(ledG);
   Serial.println(ledB);
+}
+
+void setServos(){
+  switch(servoPos){
+    case 0:
+      servo1.write(45);
+      servo2.write(45);
+      servo3.write(45);
+      break;
+    case 1:
+      servo1.write(135);
+      servo2.write(45);
+      servo3.write(45);
+      break;
+    case 2:
+      servo1.write(45);
+      servo2.write(135);
+      servo3.write(45);
+      break;
+    case 3:
+      servo1.write(135);
+      servo2.write(135);
+      servo3.write(45);
+      break;
+    case 4:
+      servo1.write(45);
+      servo2.write(45);
+      servo3.write(135);
+      break;
+    case 5:
+      servo1.write(135);
+      servo2.write(45);
+      servo3.write(135);
+      break;
+    case 6:
+      servo1.write(45);
+      servo2.write(135);
+      servo3.write(135);
+      break;
+    case 7:
+      servo1.write(135);
+      servo2.write(135);
+      servo3.write(135);
+      break;
+  }
 }
 
